@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ */
+class ProductFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->word,
+            'category_id' => Category::inRandomOrder()->first()->id, // Generate a random category for the product
+            'price' => $this->faker->randomFloat(2, 1, 1000), // Random price between 1 and 1000
+            'count' => $this->faker->numberBetween(1, 100), // Random count between 1 and 100
+        ];
+    }
+}
